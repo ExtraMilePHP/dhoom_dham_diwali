@@ -85,6 +85,10 @@ include_once '../admin_assets/triggers-new.php';
 <div class="col-md-12 text-center">
     <!-- <img src="img/feeling_lucky.png" class="feeling-lucky"/> -->
      <div class="feeling-lucky-title">Feeling Lucky ?</div>
+     <div class="col-md-12">
+     <div class="rules-button text-center">Rules</div>
+     </div>
+
 </div>
 <div class="col-md-10 col-md-offset-1 page-rule-container">
     <div class="page-rule-title">Follow the 2 steps below, try your luck and win!</div>
@@ -110,7 +114,7 @@ echo "</tr>";
 </div>
 </div>
 
-<div class="col-md-7">
+<div class="col-md-7 nopadding-mob">
 <div class="col-md-12 nopadding-mob">
     <div class="col-md-12 text-center ticket-container">
         <div id="ticket-box">
@@ -197,8 +201,8 @@ var virtualArray=[];
                  }
                  for(var i=0; i<wordsdiv; i++){
                     $(".default-words td").removeAttr("capture");
-                    $(".default-words td").css("background","white");
-                    $(".default-words td").css("color","black");
+                    $(".default-words td").css("background","transparent");
+                    $(".default-words td").css("color","white");
                  }
         }
 
@@ -275,6 +279,12 @@ while(uniqueNumbers.length < 12){
     }
 }
 
+$(".rules-button").click(function(){
+    emPop("", {
+                  reload: false
+                });
+});
+
 
 $(".create-ticket").click(function(){
         collectAnswers=[];
@@ -307,17 +317,11 @@ $(".create-ticket").click(function(){
             console.log(data);
             var data = JSON.parse(data);
                     if(data.success){
-                           if(data.isdemo){
-                                swal("Subscribe to any PLAN to play with your peers.", "", "success").then(() => {
-                                location.reload();
-                              });
-                       }else{
-                                location.reload();
-                         }
-                }else{
+                         location.href=("create.php");
+                     }else{
                    swal("",data.error,"error")
-                    }
-        } 
+              }
+         } 
     });    
         }
     });

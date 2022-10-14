@@ -52,6 +52,7 @@ body{
     border: 1px solid white;
     text-align: center;
     padding: 3px;
+    cursor: pointer;
 }
 .autogenerate{
     font-size: 15px;
@@ -121,7 +122,17 @@ body{
     padding-left:0px;
     padding-right:0px;
 }
-
+.rules-button{
+    font-size: 18px;
+    color: black;
+    float: right;
+    margin-right: 20px;
+    /* position: relative; */
+    margin-top: -30px;
+    background: white;
+    width: max-content;
+    padding: 5px 10px;
+}
 
 
 @media (min-width:100px) and (max-width:500px){
@@ -161,5 +172,9 @@ body{
     .off{
         font-size:7px;
     }
+    .rules-button{
+        float:unset;
+        margin:0 auto;
+     }
    }
  

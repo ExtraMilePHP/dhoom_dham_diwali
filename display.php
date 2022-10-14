@@ -87,7 +87,7 @@ include_once '../admin_assets/triggers-new.php';
     <div class="action-button show-ticket" action-data="ticket"><img src="images/icon-claim.png"/><span>Show Ticket</span></div>
 </div>
 </div>
-<div class="col-md-6 nopadding-web nopadding-mob">
+<div class="col-md-6 tickit-and-display nopadding-web nopadding-mob">
 <div class="col-md-12 nopadding-web text-center ticket-container">
         <div id="ticket-box">
             <div class="off"></div>
@@ -169,7 +169,8 @@ include_once '../admin_assets/triggers-new.php';
 </div>
 </div>
 
-<img src="images/bottom-gif.gif" class="bottom-gif"/>
+<img src="images/bottom-gif.gif" class="bottom-gif desk"/>
+<img src="images/bottom-gif-mob.gif" class="bottom-gif mob"/>
 <script>
 
   
@@ -348,6 +349,14 @@ function fillAllNumbers(){
   window.scrollTo(0, 0);
 }
 
+
+if(responseNumbers==false){
+  $(".ticket-container").html('<div class="notice">Note: You have not created ticket. in time</div>');
+  $(".ticket-container").css("height","auto");
+  $(".action-button").eq(1).hide();
+  $(".action-button").eq(2).hide();
+  $(".action-button").eq(4).hide();
+}
 
     fillAllNumbers();
 

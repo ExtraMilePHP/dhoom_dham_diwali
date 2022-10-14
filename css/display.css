@@ -123,7 +123,7 @@ body{
     display: inline-block;
     padding: 5px 13px;
     padding-right: 23px;
-    margin-top: 10px;
+    margin-top: 15px;
     color: wheat;
     border-top-right-radius: 15px;
     position: relative;
@@ -157,15 +157,15 @@ body{
 }
 .release-table td{
     color: white;
-    border: 1px solid white;
+    border: 1px solid #ffae21;
     text-align: center;
     padding: 3px;
     font-size: 13px;
     padding: 1px;
-    background: black;
+    background: #b40c36;
     color: white;
     width: 20%;
-    height: 50px;
+    height: 32px;
 }
 
 .select-tag{
@@ -197,8 +197,11 @@ body{
 .leaderboard-fetch{
     width:100%;
 }
+.leaderboard-fetch{
+    border:1px solid #ffae21;
+}
 .leaderboard-fetch th{
-    background: black;
+    background: #b80d3d;
     color: white;
     padding: 5px;
     font-weight: 100;
@@ -216,9 +219,6 @@ body{
 }
 .web{
     display:block;
-}
-.show-ticket{
-    display:none;
 }
 
 #weavy-messenger-container {
@@ -249,10 +249,18 @@ body{
     padding-top:61%;
 }
 .bottom-gif{
-    position: absolute;
+    position: fixed;
     bottom: 0px;
     width: 100%;
-    z-index: 10;
+    z-index: 999;
+}
+.notice{
+    background: white;
+    padding: 5px 15px;
+    /* border-radius: 10px; */
+    font-size: 18px;
+    width: max-content;
+    margin: 0 auto;
 }
 
 @media (min-width:100px) and (max-width:500px){
@@ -318,5 +326,8 @@ body{
     .ticket-container{
         display:none;
     }
+     .tickit-and-display{
+        padding-bottom: 200px;
+     }
    }
  

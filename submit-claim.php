@@ -131,9 +131,9 @@ function claimCheck($released,$user_claim,$expectedValue,$check_flow){
                     $claimValid=true;
                 }
             }else{
-            if($claimValue>=$expectedValue){
-                $claimValid=true;
-            }
+                if($claimValue>=$expectedValue){
+                    $claimValid=true;
+                }
             }
         }else if($check_flow=="reverse"){
             if($claimValue==$expectedValue){
