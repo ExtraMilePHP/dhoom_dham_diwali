@@ -1,0 +1,122 @@
+.em-popup{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0;
+    overflow-y: auto;
+    background-color: rgba(0,0,0,.4);
+    z-index: 10000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s;
+   }
+   .em-modal{
+    width: 618px;
+    height: 248px;
+    padding-top: 40px;
+    padding-left: 75px;
+    margin: 0 auto;
+    margin-top: 60px;
+    position:relative;
+    background-image: url(../images/rules-popup-web.png);
+    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
+    text-align:center;
+   }
+   .em-popup-button{
+    margin-top: 5px;
+    font-size: 18px;
+    font-weight: bolder;
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    bottom: -29px;
+    margin: 0 auto;
+    padding: 0px 19px;
+    width: max-content;
+    /* transform: rotate(-3deg); */
+   }
+   .em-icon-container{
+     width:100%;
+   }
+   /* .em-icon-container img{
+    width: 335px;
+    transform: rotate(-3deg);
+    position: relative;
+    top: -20px;
+    transition: 1s all;
+   } */
+   .em-content{
+    font-size: 25px;
+    width: 350px;
+    padding: 5px;
+    line-height: 30px;
+    color: #5679ff;
+    margin: 0 auto;
+    border-radius:10px;
+    background: white;
+    transform: rotate(3deg);
+    transition: 1s all;
+   }
+   .em-rules{
+      width:60%;
+   }
+   .em-rules-Button{
+    background: white;
+    color: purple;
+    width: max-content;
+    color: #d6006c;
+    font-size: 17px;
+    padding: 3px 10px;
+   }
+   .em-rules ol{
+     padding-left:0px;
+     margin-top:10px;
+   }
+   .em-rules li{
+    font-size: 17px;
+    color: white;
+    padding-left: 0px;
+    text-align: left;
+   }
+ 
+   @media (min-width:100px) and (max-width:500px){
+    .em-content{
+        font-size:21px;
+        width:75%;
+        padding:4px;
+        line-height: 25px;
+    }
+    .em-icon-container img{
+        width:41%;
+    }
+    .em-modal{
+        background:url(../images/rules-popup-mob.png);
+        background-size: cover;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    .em-modal{
+        width:100%;
+        height:311px;
+    }
+    .em-rules{
+        width:90%;
+    }
+    .em-rules li{
+        font-size:16px;
+    }
+    .em-rules-Button{
+        margin-top:12px;
+    }
+    .em-popup-button{
+        margin-bottom:-7px;
+    }
+   }
+
+
+   

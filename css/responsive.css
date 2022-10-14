@@ -1,0 +1,24 @@
+/* ipad portrait */
+@media only screen and ( max-width: 981px ) {
+.shell{width:100%;}
+
+
+}
+
+
+
+/* Mobiles with width between 600px and 768px */
+@media only screen and ( max-width: 750px ) {
+.shell{width:100%;}
+
+
+}
+
+
+/* mobile with small screens */
+@media only screen and ( max-width: 460px) {
+.shell{width:100%;}
+.logoNavratri{ display:block; }
+.logoBirla{display:block;}
+.imgsDiv ul li{ display:block; padding: 0 0 20px;}
+}

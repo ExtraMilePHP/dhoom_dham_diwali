@@ -1,0 +1,165 @@
+@font-face {
+    font-family: 'FiraSans-Medium';
+    src: url('../fonts/FiraSans-Medium.otf');
+  }
+
+body{
+    width: 100%;
+    background-color: white;
+    background-image: url(../images/background-new.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    font-family: 'FiraSans-Medium';
+}
+.auto{
+    margin:0 auto;
+    float:unset;
+}
+.container-control{
+    margin-top: 15px;
+}
+
+.feeling-lucky{
+    width:240px;
+    margin:0 auto;
+}
+.page-rule-container{
+    margin-top:10px;
+}
+.page-rule-title{
+    font-size:23px;
+    color:white;
+    text-align: center;
+}
+.page-rule-container ul{
+    list-style-type:none;
+}
+.page-rule-container li{
+    font-size:18px;
+    color:white;
+}
+.page-rule-container li span{
+    color: #fca64b;
+    font-weight: bolder;
+}
+.default-words{
+    width:100%;
+    margin-bottom: 20px;
+}
+.default-words td{
+    color: white;
+    border: 1px solid white;
+    text-align: center;
+    padding: 3px;
+}
+.autogenerate{
+    font-size: 15px;
+    padding: 3px 12px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 10px;
+}
+.ticket-container{
+    position: relative;
+    height: 250px;
+    padding: 1.5%;
+}
+.ticket-image{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    top: 0;
+}
+.off,.on{
+    width: 12.5%;
+    /* height: 84px; */
+    float: left;
+    overflow: hidden; /*visible*/
+    overflow-y: hidden;
+    overflow-x: hidden; /*visible*/
+    /* white-space: nowrap; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#ticket-box{
+    background: black;
+    z-index: 999;
+    position: relative;
+    width: 70%;
+    height: 100%;
+    margin: 0px auto;
+}
+
+.off{
+    background:white;
+}
+.on{
+    background:red;
+}
+.create-ticket{
+    margin: 20px auto;
+    font-size: 18px;
+    padding: 4px 17px;
+    /* border-radius: 10px; */
+    border: none;
+}
+
+.feeling-lucky-title{
+    font-size: 38px;
+    margin-top: 10px;
+    color: #ffc200;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+.npadding-web{
+    padding-left:0px;
+    padding-right:0px;
+}
+
+
+
+@media (min-width:100px) and (max-width:500px){
+    body{
+        background-image: url(../images/display-mob.jpg);
+    }
+    .feeling-lucky{
+        width:150px;
+        margin-top:20px;
+    }
+    .page-rule-title{
+        font-size:19px;
+    }
+    .page-rule-container{
+        margin-top:12px;
+    }
+    .page-rule-container ul{
+        font-size:16px;
+        padding-left:15px;
+    }
+    .default-words td{
+        font-size:10px;
+    }
+    .autogenerate{
+        font-size:14px;
+    }
+    .create-ticket{
+        font-size:14px;
+    }
+    .ticket-container{
+        height: 130px;
+    }
+    .nopadding-mob{
+        padding-left:0px;
+        padding-right:0px;
+    }
+    .off{
+        font-size:7px;
+    }
+   }
+ 
