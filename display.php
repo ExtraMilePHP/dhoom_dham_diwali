@@ -3,6 +3,11 @@ error_reporting(E_ALL);
 session_start();
 include_once 'dao/config.php';
 include_once '../check-rating.php';
+
+if(empty($_SESSION['userId'])){
+  header("Location:index.php");
+}
+
 $isRated=check_rating();
 $userId=$_SESSION['userId'];
 $organizationId=$_SESSION['organizationId'];
@@ -36,6 +41,8 @@ include_once '../admin_assets/triggers-new.php';
   $claims=default_data("claims");
   $rules=default_data("rules");
 
+
+
   $prevent_submit=toogles("prevent_submit");
   $prevent_claim=toogles("prevent_claim");
   $display_leaderboard=toogles("display_leaderboard");
@@ -44,6 +51,12 @@ include_once '../admin_assets/triggers-new.php';
   if(is_numeric($array_values[0])){
     $text="Numbers";
   }
+
+  if(!$prevent_submit){
+    if(!$isExist){
+         header("Location:create.php");
+    }
+ }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,6 +75,7 @@ include_once '../admin_assets/triggers-new.php';
 </head>
 <body>
 <?php include("../actions-default.php");  back("index.php?save");?>
+<canvas id="mycanvas"></canvas>
 <div class="container-fluid">
 <div class="row">
 <div class="col-md-11 auto page-vertical-container nopadding-mob">
@@ -171,6 +185,7 @@ include_once '../admin_assets/triggers-new.php';
 
 <img src="images/bottom-gif.gif" class="bottom-gif desk"/>
 <img src="images/bottom-gif-mob.gif" class="bottom-gif mob"/>
+
 <script>
 
   
@@ -260,6 +275,10 @@ include_once '../admin_assets/triggers-new.php';
 <script src="env.js"></script>
 <script src="https://vjs.zencdn.net/7.6.6/video.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js'></script>
+<script src='https://pixijs.download/release/pixi.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/pixi-filters@latest/dist/pixi-filters.js'></script>
+<script src="js/fireworks.js"></script>
 <script type="text/javascript">
 
 function css_handle(){
@@ -323,17 +342,27 @@ function ini(){
             console.log(data);
             var data = JSON.parse(data);
             console.log(data);
- var prepareData="";
-     prepareData+="<tr>";
-  for (i = 1; i < data.launchpos; i++) {
-    if (i % data.numlimit == 1 && i != 1) {
-        prepareData+="</tr><tr>";
-    }
-         var prepare_num=data.shuffle[i-1];
-         prepareData+="<td>"+data.array_values[prepare_num-1]+"</td>";
-     }
-         prepareData+="</tr>"
+           var reverse_values=data.array_values;
+           var reverse_shuffle=data.shuffle;
 
+       var loadArray=[];
+     for (i = 1; i < data.launchpos; i++) {
+     if (i % data.numlimit == 1 && i != 1) { }
+         var prepare_num=reverse_shuffle[i-1];
+        loadArray.push(reverse_values[prepare_num-1]);
+     }
+
+         loadArray.reverse();
+         totalLoadArray=loadArray.length+1;
+         var prepareData="";
+          prepareData+="<tr>";
+             for (i = 1; i < totalLoadArray; i++) {
+               if (i % data.numlimit == 1 && i != 1) {
+                    prepareData+="</tr><tr>";
+              }
+           prepareData+="<td>"+loadArray[i-1]+"</td>";
+         }
+         prepareData+="</tr>"
          $(".release-table").html(prepareData);
         } 
     }); 
@@ -388,7 +417,7 @@ function getLeaderboard(){
         var data = JSON.parse(result); 
            console.log(data);
            var prepareData="";
-           prepareData+="<tr><th>Name</th><th>Email</th><th>Timestamp</th></tr>";
+           prepareData+="<tr><th>Name</th><th>Email</th><th>Organization</th></tr>";
            console.log(data.boardData);
            for(i=0; i<data.boardData.length; i++){
             prepareData+="<tr>";
@@ -416,12 +445,16 @@ var opening = {
     var conn = new WebSocket(socketUrl);
     conn.onmessage = function(e) {
         var final = JSON.parse(e.data);
-           console.log(data);
-        if (Array.isArray(final)) {
-            console.log("don't need to show");
-        } else {
-            showRequests(final);
-        }
+           console.log(e.data);
+           if(final.response=="REFRESH_DATA"){
+            ini();
+            StartFireworks();
+           }
+        // if (Array.isArray(final)) {
+        //     console.log("don't need to show");
+        // } else {
+        //     showRequests(final);
+        // }
     };
 
     conn.onopen = function(e) {
@@ -434,11 +467,7 @@ var opening = {
     };
 
 
-    function showRequests(final) {
-        if(final.request == "REFRESH_DATA"){
-             ini();
-        }
-    }
+    
 
 </script>
 </html>

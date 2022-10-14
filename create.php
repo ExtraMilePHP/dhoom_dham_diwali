@@ -3,6 +3,11 @@ error_reporting(E_ALL);
 session_start();
 include_once 'dao/config.php';
 include_once '../check-rating.php';
+
+if(empty($_SESSION['userId'])){
+    header("Location:index.php");
+}
+
 $isRated=check_rating();
 $userId=$_SESSION['userId'];
 $organizationId=$_SESSION['organizationId'];
@@ -317,7 +322,7 @@ $(".create-ticket").click(function(){
             console.log(data);
             var data = JSON.parse(data);
                     if(data.success){
-                         location.href=("create.php");
+                         location.href=("display.php");
                      }else{
                    swal("",data.error,"error")
               }

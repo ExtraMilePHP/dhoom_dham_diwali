@@ -90,10 +90,13 @@ $numlimit=default_data("numlimit");
                 if(($launchpos*$for_word)==50){
                   echo '<div class="well" style="margin-top:10px; font-weight:bolder; color:red;">All 50 Number/words Released.</div>';
                 }else{
-                  echo '<a href="events.php?events=release_number"><button class="btn btn-lg em-color login-button reload-button" style="margin-top:15px;" type="submit" name="submit">Release '.$for_word.' Numbers or Words</button></a>';
+                  echo '<a href="events.php?events=release_number"><button class="btn btn-lg em-color login-button" style="margin-top:15px;" type="submit" name="submit">Release '.$for_word.' Numbers or Words</button></a>';
                 }
                   
                  ?>         
+          </div>
+          <div class="form-container">
+              <div class="btn btn-success reload-button" style="margin-top:20px;">Force Reload </div>
           </div>
           <div class="form-container" style="margin-top:20px;">
                 <?php

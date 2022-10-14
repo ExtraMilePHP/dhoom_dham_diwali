@@ -6,7 +6,7 @@ $settings=json_decode(file_get_contents("settings.js"),true)[0];
 $organizationId=$_SESSION['organizationId'];
 $sessionId=$_SESSION['sessionId'];
 include_once '../dao/config.php';
-include_once '../../admin_assets/triggers.php';
+include_once '../../admin_assets/triggers-new.php';
 
 if (!$_SESSION['adminId']) {
     header('Location:../index.php?save');
@@ -70,6 +70,7 @@ foreach ($claims[0] as $key => $val){
                                     <tr>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Org</th>
                                         <th>Rank</th>
                                         <th>Category</th>
                                         <th>Tikit</th>
@@ -80,7 +81,7 @@ foreach ($claims[0] as $key => $val){
                                 </thead>
                                 <?php 
                                            $sql="SELECT t1.id,t1.allowed,
-                                           t2.numbers,t1.claim,t2.email,t2.name,t1.timestamp,t1.when_released FROM
+                                           t2.numbers,t1.claim,t2.email,t2.name,t2.orgName,t1.timestamp,t1.when_released FROM
                                            claims t1
                                            LEFT JOIN collect t2 
                                            ON t1.claim_id= t2.id where  t1.claim='$currentClaim' order by t1.timestamp asc";
@@ -105,6 +106,7 @@ foreach ($claims[0] as $key => $val){
                                             <tr>
                                                <td><?php echo $get["name"];?></td>
                                                <td><?php echo $get["email"];?></td>
+                                               <td><?php echo $get["orgName"];?></td>
                                                <td><?php echo $rank;?></td>
                                                <td><?php echo ucwords(str_replace("_"," ",$get["claim"]));?></td>
                                                <td><div class="btn btn-success btn-sm view-tikit" data='<?php echo json_encode(unserialize($get["numbers"]));?>' method='<?php echo $get["claim"];?>' data_two='<?php echo json_encode($released_num_sim);?>' method='<?php echo $get["claim"];?>' when='<?php echo $get["when_released"];?>'>Open</div></td>

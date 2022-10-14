@@ -25,10 +25,10 @@ $rank=0;
 $generate_data=array();
 if($display_leaderboard){
   $sql="SELECT 
-  t2.numbers,t1.claim,t2.email,t2.name,t1.timestamp,t1.when_released FROM
+  t2.numbers,t1.claim,t2.email,t2.name,t2.orgName,t1.timestamp,t1.when_released FROM
   claims t1
   LEFT JOIN collect t2 
-  ON t1.claim_id= t2.id where allowed='1' order by t1.timestamp asc";
+  ON t1.claim_id= t2.id where allowed='1' order by t1.timestamp asc limit 10";
   $sql=mysqli_query($con,$sql);
   while($get=mysqli_fetch_array($sql)){
     $when=$get["when_released"];
@@ -41,7 +41,7 @@ if($display_leaderboard){
         $uc_words=ucwords(str_replace("_"," ",$get["claim"]));
         $unserialize_number=json_encode(unserialize($get["numbers"]));
         $release_number_simulation=json_encode($released_num_sim);
-        array_push($generate_data,array($get["name"],$get["email"],$rank,$currentClaim,$release_number_simulation,$when,$get["timestamp"]));
+        array_push($generate_data,array($get["name"],$get["email"],$rank,$currentClaim,$release_number_simulation,$when,$get["orgName"]));
     
   } 
 }

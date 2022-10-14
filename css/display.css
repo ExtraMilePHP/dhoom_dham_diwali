@@ -6,7 +6,7 @@
 body{
     width: 100%;
     background-color: white;
-    background-image: url(../images/background-new-three.jpg);
+    background-image: url(../images/background-empty.jpg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-attachment: fixed;
@@ -261,6 +261,17 @@ body{
     font-size: 18px;
     width: max-content;
     margin: 0 auto;
+}
+
+.tickit-and-display{
+    padding-bottom:80px;
+}
+
+#mycanvas{
+    position: absolute;
+    width: 100% !important;
+    top: 0;
+    left: 0;
 }
 
 @media (min-width:100px) and (max-width:500px){
