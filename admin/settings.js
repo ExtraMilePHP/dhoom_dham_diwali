@@ -9,7 +9,7 @@
             "auto_generate":"false"
     },
     "defaults":{
-           "values_array":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],
+           "values_array":["Bonus","Dhoom","Phataka","Chakri","CowDung","Family","Rangoli","Cleaning","Games","SoanPapdi","Ladi","Party","Phuljhadi","Baarood","Jalebi","Laddu","Pachas","Vasooli","Hardik","Dhamaal","Cards","Flower","Diya","Anar","Kitkat","Maachis","Carnival","Bomb","Dhanteras","Bandook","Candles","Kartik","Siblings","Kuber","Divine","Tilak","Magical","Photos","Celebration","Ayodhya","Music","Gift","Holiday","Tradition","Puja","Chocolates","Bandhan","Rocket","Shopping","Sale"],
            "shuffle":["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"],
            "launchpos":0,
            "numlimit":5,

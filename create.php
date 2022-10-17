@@ -63,7 +63,7 @@ include_once '../admin_assets/triggers-new.php';
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/create.css">
+  <link rel="stylesheet" type="text/css" href="css/create.css?v=8">
 </head>
 <body>
 <?php include("../actions-default.php");  back("index.php?save");?>
@@ -77,7 +77,7 @@ include_once '../admin_assets/triggers-new.php';
                 <ol>
                    <li>You can create your ticket only once</li>
                    <li>It will get saved under your login user details</li>
-                   <li>Enjoy the game together on a LIVE VC call</li>
+                   <li>Enjoy the game together on 19th Oct 6PM IST.</li>
                 </ol>
             </div>
             <button class="em-popup-button" value="OK" style="">OK</button>
@@ -98,7 +98,7 @@ include_once '../admin_assets/triggers-new.php';
 <div class="col-md-10 col-md-offset-1 page-rule-container">
     <div class="page-rule-title">Follow the 2 steps below, try your luck and win!</div>
     <ul>
-        <li><span>Step 1: </span>Select any 12 of the 50 Numbers shown below by clicking on the numbers one at a time.</li>
+        <li><span>Step 1: </span>Select any 12 of the 50 words shown below by clicking on the words one at a time.</li>
         <li><span>Step 2: </span>Press submit.</li>
     </ul>
 </div>
@@ -162,6 +162,8 @@ echo "</tr>";
 </div>
 </div>
 </div>
+<img src="images/bottom-gif.gif" class="bottom-gif desk"/>
+<img src="images/bottom-gif-mob.gif" class="bottom-gif mob"/>
 </body>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="em-popup.js"></script>
@@ -248,7 +250,7 @@ var virtualArray=[];
                 autogen=false;
                 console.log(getText);
             }else{
-            alert("only 12 Numbers can be selected");
+            alert("only 12 Words can be selected");
         }
             }
     
@@ -262,7 +264,7 @@ var virtualArray=[];
                     $(".default-words td").css("color","white");
                  }
    genRandom();
-   swal("Ticket Generated", "Fill Your Details Below to save your ticket", "success");
+   swal("Ticket Generated", "", "success");
                 setTimeout(function(){
                     console.log("activate");
                     autogen=true;
@@ -301,7 +303,7 @@ $(".create-ticket").click(function(){
             }else{
                 isAllCollected=false;
                 allInputs.eq(i).css("border","1px solid red");
-                swal("", "you must select all 12 numbers", "error");
+                swal("", "you must select all 12 words", "error");
             }
         }
         if(isAllCollected){

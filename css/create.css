@@ -82,6 +82,7 @@ body{
     overflow-y: hidden;
     overflow-x: hidden; /*visible*/
     /* white-space: nowrap; */
+    font-size:12px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,10 +105,13 @@ body{
     background:red;
 }
 .create-ticket{
-    margin: 20px auto;
+    margin:14px auto;
     font-size: 18px;
-    padding: 4px 17px;
+    padding: 4px 25px;
     /* border-radius: 10px; */
+    background-image: url("../img/rule-button-image.png?v=1");
+    background-size: 100% 100%;
+    background-color: transparent;
     border: none;
 }
 
@@ -124,20 +128,42 @@ body{
 }
 .rules-button{
     font-size: 18px;
+    background-image: url("../img/rule-button-image.png?v=1");
+    background-size: 100% 100%;
     color: black;
     float: right;
     margin-right: 20px;
     /* position: relative; */
     margin-top: -30px;
-    background: white;
+    /* background: white; */
     width: max-content;
-    padding: 5px 10px;
+    padding: 5px 29px;
 }
 
+.bottom-gif{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    z-index: 999;
+}
+
+
+.mob{
+    display:none;
+}
+.web{
+    display:block;
+}
 
 @media (min-width:100px) and (max-width:500px){
     body{
         background-image: url(../images/display-mob.jpg);
+    }
+    .mob{
+        display:block;
+    }
+    .web{
+        display:none;
     }
     .feeling-lucky{
         width:150px;

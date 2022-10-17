@@ -65,6 +65,7 @@ include_once '../admin_assets/triggers-new.php';
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -72,7 +73,7 @@ include_once '../admin_assets/triggers-new.php';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.14.3/video.min.js"></script>
     <script src="https://player.live-video.net/1.13.0/amazon-ivs-videojs-tech.min.js"></script>
     <script src="aws-sdk-2.1232.0.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/display.css">
+  <link rel="stylesheet" type="text/css" href="css/display.css?v=10">
 </head>
 <body>
 <?php include("../actions-default.php");  back("index.php?save");?>
@@ -91,18 +92,23 @@ include_once '../admin_assets/triggers-new.php';
                             </video>
                         </div> -->
                         <div id="html5videoplayer">
-                        <video id="amazon-ivs-videojs" class="video-js vjs-4-3 vjs-big-play-centered" controls autoplay playsinline></video>
+                        <video id="amazon-ivs-videojs"  poster="https://uat.extramileplay.com/php/dhoom_dham_diwali/img/banner-data.jpg?v=1" class="video-js vjs-4-3 vjs-big-play-centered" controls autoplay playsinline></video>
                         </div>
 <!-- <img src="images/screenshot-test.png" id="html5videoplayer" style="width:100%;"/>                      -->
-<div class="col-md-12 nopadding-mob">
-    <div class="action-button" action-data="chat"><img src="images/icon-chat.png"/>Chat</div>
-    <div class="action-button" action-data="submit-claim"><img src="images/icon-claim.png"/>Submit Claim</div>
-    <div class="action-button" action-data="words"><img src="images/icon-words.png"/>Words</div>
-    <div class="action-button" action-data="leaderboard"><img src="images/icon-leaderboard.png"/>Leaderboard</div>
-    <div class="action-button show-ticket" action-data="ticket"><img src="images/icon-claim.png"/><span>Show Ticket</span></div>
+<div class="col-md-12 nopadding-mob text-center">
+    <div class="action-button" pos="0" action-data="chat"><img src="images/icon-chat.png"/>Chat</div>
+    <div class="action-button" pos="1" action-data="submit-claim"><img src="images/icon-claim.png"/>Submit Claim</div>
+    <div class="action-button" pos="2" action-data="words"><img src="images/icon-words.png"/>Words</div>
+    <div class="action-button" pos="3" action-data="leaderboard" style="display:none;"><img src="images/icon-leaderboard.png"/>Winner</div>
 </div>
 </div>
 <div class="col-md-6 tickit-and-display nopadding-web nopadding-mob">
+  <div class="col-md-12 text-center ticket-button-container">
+  <div class="show-ticket" action-data="ticket">Ticket &nbsp;<label class="switch">
+  <input type="checkbox" checked>
+  <span class="slider round"></span>
+</label></div>
+  </div>
 <div class="col-md-12 nopadding-web text-center ticket-container">
         <div id="ticket-box">
             <div class="off"></div>
@@ -134,7 +140,7 @@ include_once '../admin_assets/triggers-new.php';
     </div>
     <div class="col-md-12" style="margin-top:30px;">
     <div class="release-word-container" style="display:none;">
-     <div class="container-title">Words Release So Far</div>
+     <div class="container-title">Words Released So Far</div>
      <button value="" class="refresh-button"><i class="material-icons">refresh</i></button>
      <table class="release-table"></table>
     </div>
@@ -308,6 +314,9 @@ css_handle();
 
 $(".action-button").click(function(){
   var gameData=$(this).attr("action-data");
+  var pos=$(this).attr("pos");
+  $(".action-button").css("background","#ff5400");
+  $(".action-button").css("color","white");
   if(gameData!="ticket"){
     $(".release-word-container,.claim-container,.leaderboard-container,.chat-contianer").hide();
   }
@@ -324,17 +333,19 @@ $(".action-button").click(function(){
     if(gameData=="chat"){
         $(".chat-contianer").show();
     }
+    $(".action-button").eq(pos).css("background","#00bcd4");
+    $(".action-button").eq(pos).css("color","black");
 });
 
 var hideTicket=false;
-$(".show-ticket").click(function(){
+$(".slider").click(function(){
         if(hideTicket){
-          $(this).find("span").html("Hide Ticket");
+          // $(this).find("span").html("Hide Ticket");
           $(".ticket-container").show();
           css_handle();
           hideTicket=false;
         }else{
-          $(this).find("span").html("Show Ticket")
+          // $(this).find("span").html("Show Ticket")
           $(".ticket-container").hide();
           hideTicket=true;
         }

@@ -169,10 +169,10 @@ bingo.on( "remove:after", function ( el, text, tagging ) {
 });
 
 function customCode(text){
-    if(text.length > 25){
-        bingo.tagging("remove", text);
-        swal('Unallowed Length', 'word character limit must be less than 10', 'error');
-    }else{
+    // if(text.length > 25){
+    //     bingo.tagging("remove", text);
+    //     swal('Unallowed Length', 'word character limit must be less than 10', 'error');
+    // }else{
         $("#showLength").removeClass("btn-success");
         $("#showLength").addClass("btn-primary");
         var t;
@@ -192,7 +192,7 @@ function customCode(text){
             $("#showLength").removeClass("btn-primary");
             $("#showLength").addClass("btn-success");
         }
-    }
+    // }
 }
 
 $("#tagButton").click(function(){
