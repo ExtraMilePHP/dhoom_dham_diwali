@@ -19,7 +19,31 @@ ob_start();
 session_start();
 error_reporting(0);
 include_once 'dao/config.php';
+$whiteLogo=true;
 include_once("../login-default.php");
+
+$userid=$_SESSION["userId"];
+$organizationId=$_SESSION["organizationId"];
+$sessionId=$_SESSION['sessionId'];
+$organizationName=$_SESSION['organizationName'];
+$fullName=$_SESSION["firstName"]." ".$_SESSION["lastName"];
+$email=$_SESSION["email"];
+
+if(function_exists('date_default_timezone_set')) {
+  date_default_timezone_set("Asia/Kolkata");
+}
+$timestamp = date('Y-m-d H:i:s');
+
+$check="select * from log_data where userid='$userid'";
+$check=mysqli_query($con,$check);
+$check=mysqli_num_rows($check);
+if($check==0){
+  $insert="INSERT INTO `log_data`(`userId`, `organizationId`,`sessionId`, `name`, `email`, `timestamp`, `timestamp_update`) VALUES ('$userid','$organizationId','$sessionId','$fullName','$email','$timestamp','$timestamp')";
+  mysqli_query($con,$insert);
+}else{
+  $update="update log_data set timestamp_update='$timestamp' where userid='$userid'";
+  mysqli_query($con,$update);
+}
 
 // if($loginSuccess){
 //   $userId=$_SESSION['userId'];

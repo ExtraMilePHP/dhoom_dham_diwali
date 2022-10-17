@@ -18,7 +18,7 @@ $values_array=default_data("values_array");
 $shuffle=default_data("shuffle");
 $claims=default_data("claims");
 
-$currentClaim="top_line";
+$currentClaim=$_POST["type"];
 
 
 $rank=0;
@@ -28,7 +28,8 @@ if($display_leaderboard){
   t2.numbers,t1.claim,t2.email,t2.name,t2.orgName,t1.timestamp,t1.when_released FROM
   claims t1
   LEFT JOIN collect t2 
-  ON t1.claim_id= t2.id where allowed='1' order by t1.timestamp asc limit 10";
+  ON t1.claim_id= t2.id where t1.claim='$currentClaim' and t1.allowed='1' order by t1.timestamp asc limit 10";
+  // echo $sql;
   $sql=mysqli_query($con,$sql);
   while($get=mysqli_fetch_array($sql)){
     $when=$get["when_released"];

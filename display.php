@@ -67,6 +67,7 @@ include_once '../admin_assets/triggers-new.php';
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.14.3/video-js.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.14.3/video.min.js"></script>
     <script src="https://player.live-video.net/1.13.0/amazon-ivs-videojs-tech.min.js"></script>
@@ -134,6 +135,7 @@ include_once '../admin_assets/triggers-new.php';
     <div class="col-md-12" style="margin-top:30px;">
     <div class="release-word-container" style="display:none;">
      <div class="container-title">Words Release So Far</div>
+     <button value="" class="refresh-button"><i class="material-icons">refresh</i></button>
      <table class="release-table"></table>
     </div>
     <div class="claim-container" style="display:none;">
@@ -160,6 +162,19 @@ include_once '../admin_assets/triggers-new.php';
     </div>
     <div class="leaderboard-container" style="display:none;">
      <div class="container-title">Leaderboard</div>
+     <div class="col-md-12 text-center">
+    <select name="cars" id="claim-data" class="select-tag-two" style="margin-top:10px;">
+<?php 
+               for($i=0; $i<sizeof($claims); $i++){
+                foreach ($claims[$i] as $key => $val){
+                  if($val){
+                    echo '<option value="'.$key.'">'.str_replace("_"," ",$key).'</option>';
+                  }
+                }
+               }
+?>
+</select>
+    </div>
      <table class="leaderboard-fetch">
       <tr>
         <th>Name</th>
@@ -304,7 +319,7 @@ $(".action-button").click(function(){
     }
     if(gameData=="leaderboard"){
         $(".leaderboard-container").show();
-        getLeaderboard();
+        getLeaderboard("top_line");
     }
     if(gameData=="chat"){
         $(".chat-contianer").show();
@@ -407,20 +422,21 @@ if(responseNumbers==false){
 
 
 
-function getLeaderboard(){
+function getLeaderboard(value){
   $.ajax({ 
        type: "POST", 
        url: "leaderboard-data.php", 
-       data: "", 
+       data: "type="+value, 
        success: function(result) {
         console.log(result);
         var data = JSON.parse(result); 
            console.log(data);
            var prepareData="";
-           prepareData+="<tr><th>Name</th><th>Email</th><th>Organization</th></tr>";
+           prepareData+="<tr><th>Rank</th><th>Name</th><th>Email</th><th>Organization</th></tr>";
            console.log(data.boardData);
            for(i=0; i<data.boardData.length; i++){
             prepareData+="<tr>";
+            prepareData+="<td>"+data.boardData[i][2]+"</td>";
             prepareData+="<td>"+data.boardData[i][0]+"</td>";
             prepareData+="<td>"+data.boardData[i][1]+"</td>";
             prepareData+="<td>"+data.boardData[i][6]+"</td>";
@@ -432,7 +448,15 @@ function getLeaderboard(){
 });
 }
 
-getLeaderboard();
+$(".refresh-button").click(function(){
+  ini();
+});
+
+$('.select-tag-two').change(function(){ 
+    var value = $(this).val();
+    getLeaderboard(value);
+});
+getLeaderboard("top_line");
 
 var opening = {
                 'request': "OPENING_REQUEST",
