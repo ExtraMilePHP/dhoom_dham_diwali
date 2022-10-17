@@ -22,12 +22,12 @@ include_once 'dao/config.php';
 $whiteLogo=true;
 include_once("../login-default.php");
 
-$userid=$_SESSION["userId"];
-$organizationId=$_SESSION["organizationId"];
-$sessionId=$_SESSION['sessionId'];
+$userid=$_SESSION["v_userId"];
+$organizationId=$_SESSION["v_organizationId"];
+$sessionId=$_SESSION['v_sessionId'];
 $organizationName=$_SESSION['organizationName'];
-$fullName=$_SESSION["firstName"]." ".$_SESSION["lastName"];
-$email=$_SESSION["email"];
+$fullName=$_SESSION["v_firstName"]." ".$_SESSION["v_lastName"];
+$email=$_SESSION["v_email"];
 
 if(function_exists('date_default_timezone_set')) {
   date_default_timezone_set("Asia/Kolkata");
