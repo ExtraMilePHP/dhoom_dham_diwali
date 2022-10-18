@@ -1,7 +1,7 @@
 <?php 
 session_start();
 include_once 'dao/config.php';
-include_once '../add_report.php';
+// include_once '../add_report.php';
 $data = json_decode(file_get_contents('php://input'), true);
 $userid=$data["userId"];
 $organizationId=$data["organizationId"];
@@ -28,11 +28,12 @@ if($prevent_submit){
     $check=mysqli_num_rows($check);
     if($check==0){
         if(mysqli_query($con,$insert)){
-            function successResponse($tools){
-                echo json_encode(array("success"=>true,"isdemo"=>$tools["isdemo"]));
-            }
-            $data=["points"=>"0","time"=>"NA"];
-            addReport($data);
+            // function successResponse($tools){
+            //     echo json_encode(array("success"=>true,"isdemo"=>$tools["isdemo"]));
+            // }
+            // $data=["points"=>"0","time"=>"NA"];
+            // addReport($data);
+            echo json_encode(array("success"=>true));
         }else{
             echo json_encode(array("success"=>false,"error"=>"something went wrong ".mysqli_error($con)));
         }
