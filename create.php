@@ -8,6 +8,7 @@ if(empty($_SESSION['userId'])){
     header("Location:index.php");
 }
 
+
 $isRated=check_rating();
 $userId=$_SESSION['userId'];
 $organizationId=$_SESSION['organizationId'];
@@ -63,7 +64,7 @@ include_once '../admin_assets/triggers-new.php';
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/create.css?v=8">
+  <link rel="stylesheet" type="text/css" href="css/create.css?v=9">
 </head>
 <body>
 <?php include("../actions-default.php");  back("index.php?save");?>
@@ -119,7 +120,7 @@ echo "</tr>";
 </div>
 </div>
 
-<div class="col-md-7 nopadding-mob">
+<div class="col-md-7 nopadding-mob right-container">
 <div class="col-md-12 nopadding-mob">
     <div class="col-md-12 text-center ticket-container">
         <div id="ticket-box">
@@ -326,7 +327,7 @@ $(".create-ticket").click(function(){
                     if(data.success){
                          location.href=("display.php");
                      }else{
-                   swal("",data.error,"error")
+                       swal("",data.error,"error")
               }
          } 
     });    

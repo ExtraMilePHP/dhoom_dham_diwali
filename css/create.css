@@ -155,6 +155,10 @@ body{
     display:block;
 }
 
+.right-container{
+    padding-bottom: 80px;
+}
+
 @media (min-width:100px) and (max-width:500px){
     body{
         background-image: url(../images/display-mob.jpg);
