@@ -23,12 +23,15 @@ $claims=default_data("claims");
 $winnerList=default_data("winnerList");
 $rules=default_data("rules");
 
+
+
 $prevent_submit=toogles("prevent_submit");
 $prevent_claim=toogles("prevent_claim");
 $display_leaderboard=toogles("display_leaderboard");
 $multiple_claims=toogles("multiple_claims");
 $winner_restrictions=toogles("winner_restrictions");
 $auto_generate=toogles("auto_generate");
+$display_chat=toogles("display_chat");
 
 
 
@@ -147,6 +150,18 @@ $auto_generate=toogles("auto_generate");
                           ?>
               
               <label for="switchery2" class="font-medium-2 text-bold-600 ml-1">Winner Restriction</label>
+            </div>
+            <div class="form-group pb-1">
+                          <?php 
+                    
+                          if($display_chat){
+                            echo '<a href="'.PAGE_NAME.'?setting=display_chat&value=false"><input type="checkbox" id="switchery2" class="switchery" data-size="sm" '.switchery($display_chat).'/></a>';
+                          }else{
+                            echo '<a href="'.PAGE_NAME.'?setting=display_chat&value=true"><input type="checkbox" id="switchery2" class="switchery" data-size="sm" '.switchery($display_chat).'/></a>';
+                          }
+                          ?>
+              
+              <label for="switchery2" class="font-medium-2 text-bold-600 ml-1">Show Chat</label>
             </div>
             <div class="well" style="margin-top:10px; font-weight:bolder; color:red;">Toogle switch to Disable / Enable</div>
 </div>

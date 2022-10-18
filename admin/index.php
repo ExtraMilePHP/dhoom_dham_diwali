@@ -26,7 +26,7 @@ $numlimit=default_data("numlimit");
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <head>
-      
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js" integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ==" crossorigin="anonymous"></script>    
 <?php include_once("../../admin_assets/common-css.php");?>
 <!-- Only unique css classes -->
     <style rel="stylesheet" type="text/css">
@@ -167,49 +167,39 @@ $numlimit=default_data("numlimit");
 
 <?php include("../../admin_assets/footer.php");?>
 <?php include_once("../../admin_assets/common-js.php");?>
+<script src="../env.js?v=1"></script>
 <script type="text/javascript">
+var socket = io(socketUrl, { transports: ['websocket', 'polling', 'flashsocket'],auth: {
+          token: "<?php echo  $_SESSION['token'];?>"
+        }});
 
-var opening = {
-                'request': "OPENING_REQUEST",
-                'userId': 'admin',
-                'name': 'admin',
-                'email': 'admin@gmail.com'
-    };
+    var msg = {
+            'userId':"<?php echo $_SESSION['userId'];?>",
+            'webinarId':"<?php echo $_SESSION['gameId'];?>",
+            "userName":"<?php echo $name;?>",
+            "mailId":"<?php  echo $email;?>",
+            'companyName':"<?php echo $_SESSION['organizationName'];?>"  
+      };
 
-
-
-        var conn = new WebSocket('ws://localhost:9090');
-          conn.onmessage = function(e) {
-            console.log(e.data);
-            var final=JSON.parse(e.data);
-              if(Array.isArray(final)){
-                 console.log("don't need to show");
-                }else{
-                 console.log(final);
-             }
-          };
-
-$(".reload-button").click(function(){
-  reload_numbers();
-});
+      socket.on('connect', function(){
+        console.log('connected');
+        socket.emit('joinWebinar',msg);
+        socket.emit('getChat',msg.webinarId);
+    });
 
 
- function reload_numbers(){
-    var message = {
-            'request': "RELEASE_NUMBER"
-        };
-    conn.send(JSON.stringify(message));
-}
+    function adminReload(){
+        socket.emit('adminRequest',msg.webinarId);
+    }
 
- 
+    $(".reload-button").click(function(){
+      adminReload();
+    });
+    socket.on('recievedReload', function(data){
+            console.log("recievedReload");
+             console.log(data);
+    });
 
-conn.onopen = function(e) {
-    conn.send(JSON.stringify(opening));
-};
-
-conn.onclose = function (e) {
-         console.log("unable to connect liveserver");
-}; 
 </script>
   </body>
 </html>

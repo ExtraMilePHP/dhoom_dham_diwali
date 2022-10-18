@@ -51,6 +51,7 @@ include_once '../admin_assets/triggers-new.php';
     $text="Numbers";
   }
 
+
   if($prevent_submit){
      header("Location:display.php");
    }
@@ -58,7 +59,7 @@ include_once '../admin_assets/triggers-new.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Dhoom Dham Diwali</title>
+  <title>Dhoom Dhaam Diwali Tambola</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">

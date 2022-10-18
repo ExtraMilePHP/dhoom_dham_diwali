@@ -7,6 +7,7 @@ include_once '../check-rating.php';
 if(empty($_SESSION['userId'])){
   header("Location:index.php");
 }
+// echo $_SESSION['token'];
 
 $isRated=check_rating();
 $userId=$_SESSION['userId'];
@@ -43,10 +44,12 @@ include_once '../admin_assets/triggers-new.php';
 
 
 
+
   $prevent_submit=toogles("prevent_submit");
   $prevent_claim=toogles("prevent_claim");
   $display_leaderboard=toogles("display_leaderboard");
   $auto_generate=toogles("auto_generate");
+  $display_chat=toogles("display_chat");
   $text="Words";
   if(is_numeric($array_values[0])){
     $text="Numbers";
@@ -61,7 +64,7 @@ include_once '../admin_assets/triggers-new.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Dhoom Dham Diwali</title>
+  <title>Dhoom Dhaam Diwali Tambola</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -72,8 +75,9 @@ include_once '../admin_assets/triggers-new.php';
     <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.14.3/video-js.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.14.3/video.min.js"></script>
     <script src="https://player.live-video.net/1.13.0/amazon-ivs-videojs-tech.min.js"></script>
-    <script src="aws-sdk-2.1232.0.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/display.css?v=10">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js" integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/display.css?v=38">
 </head>
 <body>
 <?php include("../actions-default.php");  back("index.php?save");?>
@@ -109,6 +113,7 @@ include_once '../admin_assets/triggers-new.php';
   <span class="slider round"></span>
 </label></div>
   </div>
+<div class="col-md-12 info-container"></div>
 <div class="col-md-12 nopadding-web text-center ticket-container">
         <div id="ticket-box">
             <div class="off"></div>
@@ -138,7 +143,7 @@ include_once '../admin_assets/triggers-new.php';
         </div>
         <img src="images/ticket.png" class="ticket-image"/>
     </div>
-    <div class="col-md-12" style="margin-top:30px;">
+    <div class="col-md-12 nopadding-mob" style="margin-top:15px;">
     <div class="release-word-container" style="display:none;">
      <div class="container-title">Words Released So Far</div>
      <button value="" class="refresh-button"><i class="material-icons">refresh</i></button>
@@ -196,7 +201,17 @@ include_once '../admin_assets/triggers-new.php';
     </div>
     <div class="chat-contianer" style="display:none;">
     <div class="container-title">Chatbox</div>
-    <!-- <div id="messenger" style="height:300px;border:1px solid black;"></div> -->
+    <div class="col-md-8 col-md-offset-2 chat-container nopadding-mob" id="chat-container"  style="<?php if(!$display_chat){ echo "display:none;";}?>">
+                                    <div class="pinned-msg">
+                                        <div class="title">HOST MESSAGE</div>
+                                        <div class="message" style="width:100%; text-align:center;">Host message</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-md-offset-2"
+                                    style="padding-left: 0px; padding-right: 0px; display:inline; <?php if(!$display_chat){ echo "display:none;";}?>" >
+                                    <input type="text" id="chat-input" placeholder="Chat as <?php echo $name;?>" /><img src="img/smile.png" id="emoji-display"/> <input type="button" rules id="send" style="" value="Send" />
+                                </div>
+                        </div>
     </div>
     </div>
 </div>
@@ -293,7 +308,7 @@ include_once '../admin_assets/triggers-new.php';
         
   </script>
 </body>
-<script src="env.js"></script>
+<script src="env.js?v=1"></script>
 <script src="https://vjs.zencdn.net/7.6.6/video.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js'></script>
@@ -301,6 +316,19 @@ include_once '../admin_assets/triggers-new.php';
 <script src='https://cdn.jsdelivr.net/npm/pixi-filters@latest/dist/pixi-filters.js'></script>
 <script src="js/fireworks.js"></script>
 <script type="text/javascript">
+
+const button = document.querySelector('#emoji-display');
+
+const picker = new EmojiButton();
+
+button.addEventListener('click', () => {
+  picker.togglePicker(button);
+  
+});
+
+  picker.on('emoji', emoji => {
+    document.querySelector('#chat-input').value += emoji;
+  });
 
 function css_handle(){
   var boxHeight= document.getElementById("ticket-box").offsetHeight;
@@ -311,6 +339,7 @@ function css_handle(){
 
 css_handle();
 
+var userId="<?php echo $_SESSION['userId'];?>";
 
 $(".action-button").click(function(){
   var gameData=$(this).attr("action-data");
@@ -337,6 +366,7 @@ $(".action-button").click(function(){
     $(".action-button").eq(pos).css("color","black");
 });
 
+$(".chat-contianer").show();
 var hideTicket=false;
 $(".slider").click(function(){
         if(hideTicket){
@@ -344,9 +374,11 @@ $(".slider").click(function(){
           $(".ticket-container").show();
           css_handle();
           hideTicket=false;
+          $(".chat-container").css("height","200px");
         }else{
           // $(this).find("span").html("Show Ticket")
           $(".ticket-container").hide();
+          $(".chat-container").css("height","400px");
           hideTicket=true;
         }
 });
@@ -406,11 +438,13 @@ function fillAllNumbers(){
 
 
 if(responseNumbers==false){
-  $(".ticket-container").html('<div class="notice">Note: You have not created ticket. in time</div>');
-  $(".ticket-container").css("height","auto");
+  $(".info-container").html('<div class="notice" style="margin-top:10px;">Note: You have not created ticket. in time</div>');
+  $(".ticket-container").hide();
   $(".action-button").eq(1).hide();
   $(".action-button").eq(2).hide();
   $(".action-button").eq(4).hide();
+  $(".chat-container").css("height","280px");
+  $(".show-ticket").hide();
 }
 
     fillAllNumbers();
@@ -443,13 +477,12 @@ function getLeaderboard(value){
         var data = JSON.parse(result); 
            console.log(data);
            var prepareData="";
-           prepareData+="<tr><th>Rank</th><th>Name</th><th>Email</th><th>Organization</th></tr>";
+           prepareData+="<tr><th>Rank</th><th>Name</th><th>Organization</th></tr>";
            console.log(data.boardData);
            for(i=0; i<data.boardData.length; i++){
             prepareData+="<tr>";
             prepareData+="<td>"+data.boardData[i][2]+"</td>";
             prepareData+="<td>"+data.boardData[i][0]+"</td>";
-            prepareData+="<td>"+data.boardData[i][1]+"</td>";
             prepareData+="<td>"+data.boardData[i][6]+"</td>";
             prepareData+="</tr>";
            }
@@ -469,37 +502,111 @@ $('.select-tag-two').change(function(){
 });
 getLeaderboard("top_line");
 
-var opening = {
-                'request': "OPENING_REQUEST",
-                'userId': '<?php echo $userId;?>',
-                'name': '<?php echo $name;?>',
-                'email': '<?php echo $email;?>'
-    };
 
 
-    var conn = new WebSocket(socketUrl);
-    conn.onmessage = function(e) {
-        var final = JSON.parse(e.data);
-           console.log(e.data);
-           if(final.response=="REFRESH_DATA"){
+    var socket = io(socketUrl, { transports: ['websocket', 'polling', 'flashsocket'],auth: {
+          token: "<?php echo  $_SESSION['token'];?>"
+        }});
+
+    var msg = {
+            'userId':"<?php echo $_SESSION['userId'];?>",
+            'webinarId':"<?php echo $_SESSION['gameId'];?>",
+            "userName":"<?php echo $name;?>",
+            "mailId":"<?php  echo $email;?>",
+            'companyName':"<?php echo $_SESSION['organizationName'];?>"  
+      };
+
+      socket.on('connect', function(){
+        console.log('connected');
+        socket.emit('joinWebinar',msg);
+        socket.emit('getChat',msg.webinarId);
+    });
+
+    function sendChat(value){
+        window.socket.emit("chats",{"userId":msg.userId,"webinarId":msg.webinarId,"userName":msg.userName,"mailId":msg.mailId,"companyName":msg.companyName,"message":value,"createdAt":"18-10-2022"});
+    }
+
+    socket.on('recievedReload', function(data){
+            console.log("recievedReload");
             ini();
             StartFireworks();
-           }
-        // if (Array.isArray(final)) {
-        //     console.log("don't need to show");
-        // } else {
-        //     showRequests(final);
-        // }
-    };
+    });
+  
 
-    conn.onopen = function(e) {
-        conn.send(JSON.stringify(opening));
-    };
+
+    socket.on('chatsMessage', function(data){
+      $(".chat-container").html("");
+            console.log("working");
+             console.log(data);
+             console.log(data.length);
+            var last10=data.slice(-10); 
+             for(i=0; i<last10.length; i++){
+                const myDate = last10[i].createdAt;
+                const time = new Date(myDate).toLocaleTimeString('en',
+                 { timeStyle: 'short', hour12: false, timeZone: 'UTC' });
+                 if(last10[i].userId==userId){
+                       $(".chat-container").append(
+                        '<div class="msg_handler"><div class="personal-chat"><div class="chat-title">' + last10[i].userName + '</div>' + last10[i].message + '<div class="chat-time">' + time +
+                        '</div></div></div>');
+                 }else{
+                       $(".chat-container").append(
+                        '<div class="msg_handler"><div class="public-chat"><div class="chat-title">' + last10[i].userName + '</div>' + last10[i].message + '<div class="chat-time">' + time +
+                        '</div></div></div>');
+                 }
+              
+             }
+             var objDiv = document.getElementById("chat-container");
+            objDiv.scrollTop = objDiv.scrollHeight;
+    });
+
+    $("#send").click(function() {
+        messagePacket();
+    });
+    $(document).on('keypress', function(e) {
+        if (e.which == 13) {
+            messagePacket();
+        }
+    });
+
+    function messagePacket() {
+        var getText = $("#chat-input").val();
+        if (getText != "") {
+            sendChat(getText);
+            $("#chat-input").val("");
+        }
+    }
+
+// var opening = {
+//                 'request': "OPENING_REQUEST",
+//                 'userId': '<?php echo $userId;?>',
+//                 'name': '<?php echo $name;?>',
+//                 'email': '<?php echo $email;?>'
+//     };
+
+
+//     var conn = new WebSocket(socketUrl);
+//     conn.onmessage = function(e) {
+//         var final = JSON.parse(e.data);
+//            console.log(e.data);
+//            if(final.response=="REFRESH_DATA"){
+//             ini();
+//             StartFireworks();
+//            }
+//         // if (Array.isArray(final)) {
+//         //     console.log("don't need to show");
+//         // } else {
+//         //     showRequests(final);
+//         // }
+//     };
+
+//     conn.onopen = function(e) {
+//         conn.send(JSON.stringify(opening));
+//     };
 
     
-    conn.onclose = function(e) {
-        console.log("connection closed!");
-    };
+//     conn.onclose = function(e) {
+//         console.log("connection closed!");
+//     };
 
 
     
