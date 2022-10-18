@@ -18,7 +18,7 @@ $prevent_claim=toogles("prevent_claim");
 $numbers=serialize($numbers);
 $fullName=$_SESSION["firstName"]." ".$_SESSION["lastName"];
 $email=$_SESSION["email"];
-$insert="INSERT INTO `collect`(`userid`, `organizationId`,`sessionId`,`orgName`,`email`,`name`,`numbers`) VALUES ('$userid','$organizationId','$sessionId','$organizationName','$email','$fullName','$numbers')";
+$insert="INSERT INTO `collect`(`userid`, `organizationId`,`sessionId`,`orgName`,`email`,`name`,`numbers`,`highlight`) VALUES ('$userid','$organizationId','$sessionId','$organizationName','$email','$fullName','$numbers','a:0:{}')";
 
 if($prevent_submit){
     echo json_encode(array("success"=>false,"error"=>"Tikit Submit disabled by admin"));

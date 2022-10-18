@@ -23,7 +23,9 @@ $isExist=false;
 if($find>0){
     $fetch=mysqli_fetch_object($fetch);
     $numbers=unserialize($fetch->numbers);
+    $tickit_select=unserialize($fetch->highlight);
     $isExist=true;
+
 }
 
 $settings=json_decode(file_get_contents("admin/settings.js"),true)[0];
@@ -116,29 +118,29 @@ include_once '../admin_assets/triggers-new.php';
 <div class="col-md-12 info-container"></div>
 <div class="col-md-12 nopadding-web text-center ticket-container">
         <div id="ticket-box">
-            <div class="off"></div>
+            <div class="off" pos="0"></div>
             <div class="on"></div>
-            <div class="off"></div>
+            <div class="off" pos="1"></div>
             <div class="on"></div>
-            <div class="off"></div>
+            <div class="off" pos="2"></div>
             <div class="on"></div>
-            <div class="off"></div>
+            <div class="off" pos="3"></div>
             <div class="on"></div>
             <div class="on"></div>
-            <div class="off"></div>
+            <div class="off" pos="4"></div>
             <div class="on"></div>
-            <div class="off"></div>
+            <div class="off" pos="5"></div>
             <div class="on"></div>
-            <div class="off"></div>
+            <div class="off" pos="6"></div>
             <div class="on"></div>
-            <div class="off"></div>
-            <div class="off"></div>
+            <div class="off" pos="7"></div>
+            <div class="off" pos="8"></div>
             <div class="on"></div>
-            <div class="off"></div>
+            <div class="off" pos="9"></div>
             <div class="on"></div>
-            <div class="off"></div>
+            <div class="off" pos="10"></div>
             <div class="on"></div>
-            <div class="off"></div>
+            <div class="off" pos="11"></div>
             <div class="on"></div>
         </div>
         <img src="images/ticket.png" class="ticket-image"/>
@@ -575,6 +577,61 @@ getLeaderboard("top_line");
             $("#chat-input").val("");
         }
     }
+
+    remove_item = function(arr, value) {
+ var b = '';
+ for (b in arr) {
+  if (arr[b] === value) {
+   arr.splice(b, 1);
+   break;
+  }
+ }
+ return arr;
+};
+    var tickit_select=<?php echo json_encode($tickit_select);?>;
+    $(".off").click(function() {
+        var hisAttri = $(this).attr("value");
+        var pos=$(this).attr("pos");
+        if (hisAttri != "selected") {
+            $(this).css("background", "yellow");
+            $(this).attr("value", "selected");
+            if(!tickit_select.includes(pos)){
+                tickit_select.push(pos);
+                update_selection();
+            }
+        } else {
+            $(this).css("background", "white");
+            $(this).attr("value", "deselect");
+            if(tickit_select.includes(pos)){
+                remove_item(tickit_select,pos);
+                update_selection();
+            }
+        }
+    });
+
+   
+    for(i=0; i<tickit_select.length; i++){
+    var pos=tickit_select[i];
+            $(".off").eq(pos).css("background", "yellow");
+            $(".off").eq(pos).attr("value", "selected");
+}
+
+    function update_selection(){
+    $.ajax({
+        "url": "update_selection.php",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+            "tickit_select":tickit_select
+        }),
+        success: function(data){
+            console.log(data);
+        }
+    });
+}
 
 // var opening = {
 //                 'request': "OPENING_REQUEST",
