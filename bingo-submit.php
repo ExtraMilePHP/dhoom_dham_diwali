@@ -17,6 +17,7 @@ $prevent_claim=toogles("prevent_claim");
 
 $numbers=serialize($numbers);
 $fullName=$_SESSION["firstName"]." ".$_SESSION["lastName"];
+$fullName=$_SESSION["name"];
 $email=$_SESSION["email"];
 $insert="INSERT INTO `collect`(`userid`, `organizationId`,`sessionId`,`orgName`,`email`,`name`,`numbers`,`highlight`) VALUES ('$userid','$organizationId','$sessionId','$organizationName','$email','$fullName','$numbers','a:0:{}')";
 

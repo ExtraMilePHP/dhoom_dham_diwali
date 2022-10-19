@@ -68,8 +68,74 @@ include_once '../admin_assets/triggers-new.php';
   <link rel="stylesheet" type="text/css" href="css/create.css?v=9">
 </head>
 <body>
-<?php include("../actions-default.php");  back("index.php?save");?>
 
+<style type="text/css" rel="stylesheet">
+    .home-default{
+        background-image: linear-gradient(to right, #E25569 , #FB9946);
+        color: white;
+        font-size: 16px;
+        padding: 3px 10px;
+        border: none;
+        font-weight:bold;
+        border-radius:5px;
+    }
+    .back-default{
+        background: #e9695e;
+        color: white;
+        font-size: 18px;
+        padding: 1px 8px;
+        border: none;
+        margin-left: 10px;
+        margin-right:15px;
+        margin-top: 0px;
+        font-weight:bold;
+        border-radius:5px;
+    }
+    .extramileplay-logo{
+        max-height:75px;
+        max-width:150px;
+        margin-top:2px;
+    }
+    .logo-holder{
+        width: auto;
+        margin-top:3px;
+        display:inline-block;
+        padding-left: 15px;
+        margin-right: 5px;
+    }
+    .back-holder{
+        width:100px;
+        display:inline-block;
+    }
+    .auto{
+      margin:0 auto;
+      float:unset;
+    }
+    .button-login{
+      background-color: #fb7100;
+    color: black;
+    font-size: 19px;
+    padding: 4px 20px;
+    color: white;
+    border-radius: 10px;
+    font-weight: bolder;
+    }
+
+    .submit-login{
+      color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+    background: black;
+    color: white;
+    font-size: 18px;
+    }
+    </style>
+<div class="container-fluid upperaction" style="margin-top:10px;">
+    <div class="row">
+    <div class="logo-holder"><a href="<?php echo $base_url;?>"><img src="img/play-white.png" class="extramileplay-logo" style=""></a></div>
+    <div class="back-holder" style="border-left:3px solid black;"><a href="<?php echo $base_url;?>"><div class="btn btn-info btn-md back-default">BACK</div></a></div>
+    </div>
+    </div>
 <div class="em-popup" style="opacity:0; ">
         <div class="em-modal">
             <div class="em-icon-container" style="display:none;"><img src="images/popup-like.png"/></div>
