@@ -5,8 +5,7 @@
 
 		
 
- $sql = "SELECT userid,organizationId,name,email,orgName,numbers from collect";
-
+$sql = "SELECT userId,organizationId,name,email,orgName from log_data where timestamp_update BETWEEN '2022-10-19 17:30:00' AND '2022-10-19 19:15:00'";
 $qur = mysqli_query($con,$sql);
  
 // Enable to download this file
