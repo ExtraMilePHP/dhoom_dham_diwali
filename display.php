@@ -7,9 +7,8 @@ include_once '../check-rating.php';
 if(empty($_SESSION['userId'])){
   header("Location:index.php");
 }
-// echo $_SESSION['token'];
 
-$isRated=check_rating();
+
 $userId=$_SESSION['userId'];
 $organizationId=$_SESSION['organizationId'];
 $sessionId=$_SESSION['sessionId'];
@@ -25,7 +24,6 @@ if($find>0){
     $numbers=unserialize($fetch->numbers);
     $tickit_select=unserialize($fetch->highlight);
     $isExist=true;
-
 }
 
  
