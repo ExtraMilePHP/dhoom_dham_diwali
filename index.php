@@ -38,7 +38,7 @@ $check="select * from log_data where userid='$userid'";
 $check=mysqli_query($con,$check);
 $check=mysqli_num_rows($check);
 if($check==0){
-  $insert="INSERT INTO `log_data`(`userId`, `organizationId`,`sessionId`, `name`, `email`, `timestamp`, `timestamp_update`) VALUES ('$userid','$organizationId','$sessionId','$fullName','$email','$timestamp','$timestamp')";
+  $insert="INSERT INTO `log_data`(`userId`, `organizationId`,`sessionId`, `name`, `email`,`orgName`, `timestamp`, `timestamp_update`) VALUES ('$userid','$organizationId','$sessionId','$fullName','$email','$organizationName','$timestamp','$timestamp')";
   mysqli_query($con,$insert);
 }else{
   $update="update log_data set timestamp_update='$timestamp' where userid='$userid'";

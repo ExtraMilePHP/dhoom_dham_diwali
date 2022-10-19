@@ -28,6 +28,17 @@ if($find>0){
 
 }
 
+ 
+
+  if(function_exists('date_default_timezone_set')) {
+    date_default_timezone_set("Asia/Kolkata");
+  }
+  $timestamp = date('Y-m-d H:i:s');
+
+  $organizationName=$_SESSION['organizationName'];
+  $update="update log_data set timestamp_update='$timestamp' and orgName='$organizationName' where userid='$userId'";
+  mysqli_query($con,$update);
+
 $settings=json_decode(file_get_contents("admin/settings.js"),true)[0];
 include_once '../admin_assets/triggers-new.php';
 
@@ -79,7 +90,7 @@ include_once '../admin_assets/triggers-new.php';
     <script src="https://player.live-video.net/1.13.0/amazon-ivs-videojs-tech.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js" integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ==" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/display.css?v=41">
+    <link rel="stylesheet" type="text/css" href="css/display.css?v=41">
 </head>
 <body>
 <?php include("../actions-default.php");  back("index.php?save");?>
