@@ -90,7 +90,7 @@ else if($claim=="four_corners"){
         }
          claimCheck($claimArray,$user_claim,0,"reverse");
     }else{
-        echo "Claim Rejected \n As you have not completed the claimed category";
+        echo "Your claim is rejected \n as the words do not match the claim";
     }
 }else if($claim=="unlucky_five"){
     if(sizeof($claimArray)>39){
@@ -99,7 +99,7 @@ else if($claim=="four_corners"){
         }
          claimCheck($claimArray,$user_claim,7,"reverse");
     }else{
-         echo "Claim Rejected \n As you have not completed the claimed category";
+         echo "Your claim is rejected \n as the words do not match the claim";
     }
 }
 
@@ -215,7 +215,7 @@ function claimCheck($released,$user_claim,$expectedValue,$check_flow){
                 }
             }
         }else{
-               echo "Claim Rejected \n As you have not completed the claimed category";
+               echo "Your claim is rejected \n as the words do not match the claim";
         }
     }
 }

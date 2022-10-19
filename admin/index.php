@@ -196,7 +196,7 @@ var socket = io(socketUrl, { transports: ['websocket', 'polling', 'flashsocket']
       adminReload();
     });
     socket.on('recievedReload', function(data){
-            console.log("recievedReload");
+             console.log("recievedReload");
              console.log(data);
     });
 

@@ -412,7 +412,7 @@ function ini(){
         loadArray.push(reverse_values[prepare_num-1]);
      }
 
-         loadArray.reverse();
+        //  loadArray.reverse();
          totalLoadArray=loadArray.length+1;
          var prepareData="";
           prepareData+="<tr>";
@@ -440,7 +440,7 @@ function fillAllNumbers(){
 
 
 if(responseNumbers==false){
-  $(".info-container").html('<div class="notice" style="margin-top:10px;">Note: You have not created ticket. in time</div>');
+  $(".info-container").html('<div class="notice" style="margin-top:10px;">Note: The game has begun, all ticket creations are now paused! Sit back and enjoy the show.</div>');
   $(".ticket-container").hide();
   $(".action-button").eq(1).hide();
   $(".action-button").eq(2).hide();
@@ -538,9 +538,9 @@ getLeaderboard("top_line");
 
     socket.on('chatsMessage', function(data){
       $(".chat-container").html("");
-            console.log("working");
-             console.log(data);
-             console.log(data.length);
+            // console.log("working");
+            //  console.log(data);
+            //  console.log(data.length);
             var last10=data.slice(-10); 
              for(i=0; i<last10.length; i++){
                 const myDate = last10[i].createdAt;
