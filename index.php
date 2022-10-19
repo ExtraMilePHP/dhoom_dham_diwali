@@ -74,7 +74,28 @@ function swal($message,$type,$redirect=''){
       $_SESSION['token']=$response_data['token'];
       $loginSuccess=true;
     }else{
-      swal("You are not allowed to play this game","error","");
+      echo '<script>swal("","Seems like there was a problem please click here to try again", {
+        buttons: {
+            catch: {
+                text: "Retry",
+                value: "Yes",
+            }
+        },
+    })
+    .then((value) => {
+        switch (value) {
+            case "no":
+                break;
+
+            case "Yes":
+                location.reload();
+                break;
+
+            default:
+
+        }
+    });</script>';
+      // swal("Seems like there was a problem please click here to try again","error","");
     }
 
 ?>
