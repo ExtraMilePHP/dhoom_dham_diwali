@@ -36,7 +36,7 @@ if($find>0){
   $timestamp = date('Y-m-d H:i:s');
 
   $organizationName=$_SESSION['organizationName'];
-  $update="update log_data set timestamp_update='$timestamp'  where userid='$userId'";
+  $update="update log_data set timestamp_update='$timestamp'  where userId='$userId'";
   mysqli_query($con,$update);
 
 $settings=json_decode(file_get_contents("admin/settings.js"),true)[0];
