@@ -79,7 +79,7 @@ include_once '../admin_assets/triggers-new.php';
     <script src="https://player.live-video.net/1.13.0/amazon-ivs-videojs-tech.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js" integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ==" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.3/dist/index.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/display.css?v=38">
+  <link rel="stylesheet" type="text/css" href="css/display.css?v=41">
 </head>
 <body>
 <?php include("../actions-default.php");  back("index.php?save");?>

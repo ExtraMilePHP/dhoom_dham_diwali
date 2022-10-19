@@ -6,7 +6,7 @@ $settings=json_decode(file_get_contents("settings.js"),true)[0];
 $organizationId=$_SESSION['organizationId'];
 $sessionId=$_SESSION['sessionId'];
 include_once '../dao/config.php';
-include_once '../../admin_assets/triggers.php';
+include_once '../../admin_assets/triggers-new.php';
 
 if(function_exists('date_default_timezone_set')) {
     date_default_timezone_set("Asia/Kolkata");
