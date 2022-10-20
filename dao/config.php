@@ -10,8 +10,28 @@ else {
 }
 
 
+$error_msg='<script>swal("","Seems like there was a problem please click here to try again", {
+    buttons: {
+        catch: {
+            text: "Retry",
+            value: "Yes",
+        }
+    },
+})
+.then((value) => {
+    switch (value) {
+        case "no":
+            break;
 
-$con=mysqli_connect($server,$username,$password,$database) or die("please check your database connection");
+        case "Yes":
+            location.reload();
+            break;
+
+        default:
+
+    }
+});</script>';
+$con=mysqli_connect($server,$username,$password,$database) or die($error_msg);
 // try {
 //     $connPdo = new PDO("mysql:host=" . $server . ";dbname=" . $database . "", "" . $username . "", "" . $password . "");
 //     $connPdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
